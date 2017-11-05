@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TPSQL</string>
+    <string name="finish">Finish</string>
+    <string name="delete_your_memos">Delete your memos</string>
+    <string name="add_your_memo">Add your memo</string>
+    <string name="create_your_memo">Create your memo</string>
+    <string name="add_memo">ADD MEMO</string>
+</resources>
