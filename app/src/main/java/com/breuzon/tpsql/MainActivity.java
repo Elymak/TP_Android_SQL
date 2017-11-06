@@ -21,9 +21,8 @@ public class MainActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        memoDao = new MemoDao(this);
-        memoDao.open();
-        refreshView();
+        //TODO initialiser le Dao et la liste de mémos
+
 
         Button addAuthorButton = findViewById(R.id.addButton);
         addAuthorButton.setOnClickListener(new View.OnClickListener() {
@@ -43,10 +42,8 @@ public class MainActivity extends ListActivity {
     }
 
     public void refreshView(){
-        List<Memo> values = memoDao.getAllModel();
-        ArrayAdapter<Memo> arrayAdapter = new ArrayAdapter<>(this,
-                R.layout.support_simple_spinner_dropdown_item,values);
-        setListAdapter(arrayAdapter);
+        //TODO appeler la base grâce au Dao et alimenter la ListView avec un ArrayAdapter
+
     }
 
     public void launchAddMemoActivityOnClick(View view){

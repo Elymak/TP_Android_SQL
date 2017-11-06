@@ -22,17 +22,9 @@ public class DeleteMemoActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_memo);
 
-        memoDao = new MemoDao(this);
-        memoDao.open();
-        refreshView();
+        //TODO initialiser le Dao
 
-        ListView listView = getListView();
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                deleteItem(adapterView, i);
-            }
-        });
+        //TODO créer un écouteur d'évenement et appeler le delete de l'item à supprimer
 
         Button finishButton = findViewById(R.id.returnButton);
         finishButton.setOnClickListener(new View.OnClickListener() {
@@ -45,9 +37,8 @@ public class DeleteMemoActivity extends ListActivity {
     }
 
     public void deleteItem(AdapterView<?> adapterView, int i) {
-        Memo memoClicked = (Memo) adapterView.getItemAtPosition(i);
-        memoDao.deleteModel(memoClicked);
-        refreshView();
+        //TODO récupérer le mémo à supprimer et appeler le Dao
+
     }
 
     public void refreshView(){

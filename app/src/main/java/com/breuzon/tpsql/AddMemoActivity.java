@@ -19,10 +19,9 @@ public class AddMemoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_memo);
 
-        memoDao = new MemoDao(this);
-        memoDao.open();
+        //TODO initialiser le Dao
 
-        final Button addAuthorButton = (Button) findViewById(R.id.addMemoButton);
+        Button addAuthorButton = (Button) findViewById(R.id.addMemoButton);
         addAuthorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,20 +32,11 @@ public class AddMemoActivity extends AppCompatActivity {
 
     public void addMemoOnClick(View view){
 
-        EditText authorNameEditText = (EditText) findViewById(R.id.editText);
-        String authorName = authorNameEditText.getText().toString();
-        System.out.println("New Memo : " + authorName);
+        //TODO récupérer l'éditeur et le contenu de l'éditeur
 
-        Memo memo = new Memo();
-        memo.setContent(authorName);
 
-        Memo newMemo = memoDao.createNewModel(memo);
+        //TODO créer le mémo
 
-        if(newMemo != null){
-            Toast.makeText(this,"Le mémo a été ajouté", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Erreur : le mémo n'a pas été ajouté", Toast.LENGTH_LONG).show();
-        }
 
         finish();
     }
