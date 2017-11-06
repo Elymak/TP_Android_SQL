@@ -26,21 +26,15 @@ public class MemoDao extends MyAbstractDao<Memo> {
 
     @Override
     public Memo createNewModel(Memo memo) {
-        ContentValues values = new ContentValues();
-        values.put(MySQLiteHelper.COLUMN_CONTENT, memo.getContent());
+        //TODO créer un ContentValues et l'insérer dans la base + retourner le nouveau memo avec son id
 
-        long insertId = getDatabase().insert(MySQLiteHelper.TABLE_MEMO, null, values);
-        Cursor cursor = getDatabase().query(MySQLiteHelper.TABLE_MEMO, allColumns,
-                MySQLiteHelper.COLUMN_ID + " = " + insertId, null, null, null, null);
-        cursor.moveToFirst();
-        Memo newMemo = cursorToModel(cursor);
-        cursor.close();
-
-        return newMemo;
+        return null;
     }
 
     @Override
     public void deleteModel(Memo memo) {
+        //TODO BONUS : rendre cette méthode générique
+
         long id = memo.getId();
         getDatabase().delete(MySQLiteHelper.TABLE_MEMO, MySQLiteHelper.COLUMN_ID
                 + " = " + id, null);
@@ -57,7 +51,8 @@ public class MemoDao extends MyAbstractDao<Memo> {
 
     @Override
     public List<Memo> getAllModel() {
-        return getAllModel(MySQLiteHelper.TABLE_MEMO, allColumns);
+        //TODO appeler la methode de la super classe avec les bons paramètres
+        return null;
     }
 
 }

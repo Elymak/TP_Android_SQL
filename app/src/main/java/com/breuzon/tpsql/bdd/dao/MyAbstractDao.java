@@ -40,20 +40,9 @@ public abstract class MyAbstractDao<M> {
     public abstract void deleteModel(M model);
 
     List<M> getAllModel(String tableName, String[] columns){
-        List<M> models = new ArrayList<>();
+        //TODO appeler la database, et retouner les données sous forme de liste
 
-        Cursor cursor = database.query(tableName, columns, null, null, null, null, null);
-        //Cursor cursor = database.rawQuery("select * from ?", new String[]{tableName});
-
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            M comment = cursorToModel(cursor);
-            models.add(comment);
-            cursor.moveToNext();
-        }
-        //fermeture du curseur
-        cursor.close();
-        return models;
+        return null;
     }
 
     protected abstract M cursorToModel(Cursor cursor);
