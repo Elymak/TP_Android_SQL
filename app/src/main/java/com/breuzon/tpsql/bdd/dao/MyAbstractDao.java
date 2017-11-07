@@ -1,5 +1,6 @@
 package com.breuzon.tpsql.bdd.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -40,16 +41,45 @@ public abstract class MyAbstractDao<M> {
     public abstract void deleteModel(M model);
 
     List<M> getAllModel(String tableName, String[] columns){
-        //TODO appeler la database, et retouner les données sous forme de liste
+        List<M> models = new ArrayList<>();
 
-        return null;
+        Cursor cursor = database.query(tableName, columns, null, null, null, null, null);
+        //Cursor cursor = database.rawQuery("select * from ?", new String[]{tableName});
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            M comment = cursorToModel(cursor);
+            models.add(comment);
+            cursor.moveToNext();
+        }
+        //fermeture du curseur
+        cursor.close();
+        return models;
+    }
+
+    M insertModel(String tableName, ContentValues values, String[] columns){
+
+        long insertId = getDatabase().insert(tableName, null, values);
+        Cursor cursor = getDatabase().query(tableName, columns,
+                MySQLiteHelper.COLUMN_ID + " = " + insertId, null, null, null, null);
+        cursor.moveToFirst();
+        M newModel = cursorToModel(cursor);
+        cursor.close();
+
+        return newModel;
+    }
+
+    void delete(String tableName, long id){
+        getDatabase().delete(tableName, MySQLiteHelper.COLUMN_ID
+                + " = " + id, null);
+        System.out.println("Memo deleted with id: " + id);
     }
 
     protected abstract M cursorToModel(Cursor cursor);
 
     public abstract List<M> getAllModel();
 
-    SQLiteDatabase getDatabase() {
+    private SQLiteDatabase getDatabase() {
         return database;
     }
 }

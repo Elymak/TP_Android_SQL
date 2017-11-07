@@ -32,8 +32,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         //Est appelée par le framework pour accéder à une BDD qui n'est pas encore créée
-        //TODO appeler la database et créer la table memo + intégrer un memo de départ
-
+        sqLiteDatabase.execSQL(DATABASE_CREATE);
+        String insertMemo = "insert into " + TABLE_MEMO + " (" + COLUMN_ID + ", " + COLUMN_CONTENT + ") " +
+                "values (1, 'Memo 1');";
+        sqLiteDatabase.execSQL(insertMemo);
     }
 
     @Override
@@ -42,8 +44,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         //Cette méthode permet de mettre à jour un schéma de BDD existant
         //ou de supprimer la BDD existante et la recréer par la méthode onCreate().
 
-        //TODO supprimer la table meme si elle existe et la recréer
-
+        Log.w(MySQLiteHelper.class.getName(),
+                "Upgrading database from version " + oldVersion + " to "
+                        + newVersion + ", which will destroy all old data");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_MEMO); //on drop d'abord les books
+        onCreate(sqLiteDatabase);
 
     }
 }
